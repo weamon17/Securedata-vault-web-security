@@ -1,0 +1,122 @@
+/* client/src/index.css — Dark & Tech design system */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body, #root {
+    @apply h-full;
+  }
+  body {
+    background-color: #070d1a;
+    @apply text-slate-100 antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+  /* Scrollbar tối */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #0f172a; }
+  ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #475569; }
+}
+
+@layer components {
+
+  /* ─── Card ─────────────────────────────────────────────── */
+  .card {
+    @apply bg-slate-900 border border-slate-800 rounded-xl shadow-sm p-4;
+  }
+  /* Card nổi bật — viền indigo glow */
+  .card-glow {
+    @apply card ring-1 ring-indigo-500/20 shadow-glow-sm;
+  }
+
+  /* ─── Button base ───────────────────────────────────────── */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2
+           text-sm font-medium border transition-all duration-150 cursor-pointer
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply btn bg-indigo-600 text-white border-indigo-600
+           hover:bg-indigo-500 hover:border-indigo-500
+           active:scale-95;
+  }
+  .btn-secondary {
+    @apply btn bg-slate-800 text-slate-200 border-slate-700
+           hover:bg-slate-700 hover:border-slate-600
+           active:scale-95;
+  }
+  .btn-danger {
+    @apply btn bg-red-600/90 text-white border-red-600
+           hover:bg-red-500 hover:border-red-500
+           active:scale-95;
+  }
+  .btn-ghost {
+    @apply btn bg-transparent text-slate-400 border-transparent
+           hover:text-slate-200 hover:bg-slate-800;
+  }
+  /* Variant nhỏ hơn */
+  .btn-sm {
+    @apply px-2.5 py-1 text-xs rounded-md;
+  }
+
+  /* ─── Input ─────────────────────────────────────────────── */
+  .input {
+    @apply block w-full rounded-lg border border-slate-700
+           bg-slate-800/60 px-3 py-2 text-sm text-slate-100
+           placeholder:text-slate-500
+           focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500
+           transition-colors;
+  }
+  /* Select kế thừa .input */
+  select.input {
+    @apply cursor-pointer;
+  }
+
+  /* ─── Badge ─────────────────────────────────────────────── */
+  .badge {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium;
+  }
+  .badge-indigo {
+    @apply badge bg-indigo-500/15 text-indigo-300 border border-indigo-500/25;
+  }
+  .badge-red {
+    @apply badge bg-red-500/15 text-red-300 border border-red-500/25;
+  }
+  .badge-emerald {
+    @apply badge bg-emerald-500/15 text-emerald-300 border border-emerald-500/25;
+  }
+  .badge-amber {
+    @apply badge bg-amber-500/15 text-amber-300 border border-amber-500/25;
+  }
+  .badge-violet {
+    @apply badge bg-violet-500/15 text-violet-300 border border-violet-500/25;
+  }
+
+  /* ─── Label in form ─────────────────────────────────────── */
+  .field-label {
+    @apply block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5;
+  }
+
+  /* ─── Section title ─────────────────────────────────────── */
+  .section-title {
+    @apply text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3;
+  }
+
+  /* ─── Table dark ────────────────────────────────────────── */
+  .table-dark {
+    @apply w-full text-sm;
+  }
+  .table-dark thead {
+    @apply bg-slate-800/50;
+  }
+  .table-dark thead th {
+    @apply p-3 text-xs font-semibold uppercase tracking-wider text-slate-400 text-left;
+  }
+  .table-dark tbody tr {
+    @apply border-t border-slate-800 transition-colors hover:bg-slate-800/30;
+  }
+  .table-dark tbody td {
+    @apply p-3 text-slate-300;
+  }
+}

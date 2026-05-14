@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Build output
+client/dist/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Database
+server/db/*.db
+server/db/*.db-wal
+server/db/*.db-shm
+
+# Docker
+Dockerfile
+**/Dockerfile
+.dockerignore
+**/.dockerignore
+docker-compose.yml
+docker-compose.*.yml
+
+# Claude Code
+.claude/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Vite
+*.local

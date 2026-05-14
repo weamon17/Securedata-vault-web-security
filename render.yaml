@@ -1,0 +1,61 @@
+# render.yaml — Infrastructure-as-Code cho Render.com
+# Docs: https://render.com/docs/infrastructure-as-code
+#
+# Deploy:
+#   1. Push repo lên GitHub (public hoặc private)
+#   2. Vào render.com → New → Blueprint → chọn repo này
+#   3. Render tự đọc file này và tạo service
+#   4. Sau khi tạo xong, vào Environment tab → đặt thủ công:
+#        ENCRYPTION_KEY  = <64 ký tự hex>  (xem README để generate)
+#        JWT_SECRET      = <chuỗi ngẫu nhiên dài>
+#   5. Manual deploy lần đầu
+
+services:
+  - type: web
+    name: securevault
+    runtime: node
+    plan: free           # free tier: 512MB RAM, spin-down sau 15 phút idle
+
+    # ─── Build ─────────────────────────────────────────────────
+    # Build frontend trước, rồi install server deps
+    buildCommand: >
+      cd client && npm ci && npm run build &&
+      cd ../server && npm ci --omit=dev
+
+    # ─── Start ─────────────────────────────────────────────────
+    # Seed DB (idempotent) rồi start server
+    startCommand: "node server/db/seed.js && node server/server.js"
+
+    # ─── Health check ──────────────────────────────────────────
+    healthCheckPath: /api/health
+
+    # ─── Environment variables ─────────────────────────────────
+    envVars:
+      # Runtime
+      - key: NODE_ENV
+        value: production
+
+      - key: PORT
+        value: 10000       # Render inject PORT tự động — giá trị này override nếu cần
+
+      # Lab: bật vulnerable endpoint cho mục đích demo học thuật
+      - key: LAB_MODE
+        value: true
+
+      # Database — lưu tại /tmp để không cần Disk addon (data reset khi restart)
+      # Nâng cấp: thêm Render Disk và đổi DB_PATH=/var/data/vault.db
+      - key: DB_PATH
+        value: /tmp/vault.db
+
+      # Bcrypt: giảm từ 12 → 10 cho free tier (ít CPU hơn), vẫn an toàn
+      - key: BCRYPT_ROUNDS
+        value: 10
+
+      # Cookie secure trên HTTPS của Render
+      - key: COOKIE_SECURE
+        value: true
+
+      # ── CẦN ĐẶT THỦ CÔNG trong Render Dashboard ──
+      # ENCRYPTION_KEY : 64 ký tự hex
+      #   generate: node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+      # JWT_SECRET     : chuỗi ngẫu nhiên bất kỳ

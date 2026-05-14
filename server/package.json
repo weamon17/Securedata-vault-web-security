@@ -1,0 +1,35 @@
+{
+  "name": "securedata-vault-server",
+  "version": "1.0.0",
+  "description": "Backend for SecureData Vault — comparative web security & data protection platform (academic midterm project).",
+  "author": "weamon17 <https://github.com/weamon17>",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "db:init": "node db/database.js --init",
+    "db:seed": "node db/seed.js",
+    "db:reset": "node db/seed.js --reset",
+    "build:client": "cd ../client && npm ci && npm run build",
+    "start:prod": "node db/seed.js && node server.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "better-sqlite3": "^11.3.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.4.1",
+    "express-validator": "^7.2.0",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
