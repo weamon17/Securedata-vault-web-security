@@ -5,7 +5,6 @@
 Side-by-side demonstration of OWASP Top 10 vulnerabilities vs hardened mitigations, with an encrypted data vault, audit logging, rule-based risk scoring, and a security analytics dashboard.
 
 **Author:** [weamon17](https://github.com/weamon17)  
-**Docker Hub:** [weamont](https://hub.docker.com/repositories/weamont)
 
 ---
 
@@ -130,4 +129,3 @@ Set `ENCRYPTION_KEY` and `JWT_SECRET` in Render Environment tab.
 | | |
 |--|--|
 | **GitHub** | [@weamon17](https://github.com/weamon17) |
-| **Docker Hub** | [weamont](https://hub.docker.com/repositories/weamont) |
